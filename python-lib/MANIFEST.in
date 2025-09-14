@@ -1,0 +1,5 @@
+recursive-include src/yourlib/data *
+include README.md
+include LICENSE
+
+

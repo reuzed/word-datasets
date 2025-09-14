@@ -1,0 +1,35 @@
+# OS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+dist/
+build/
+*.egg-info/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log*
+pnpm-lock.yaml
+
+# Editors
+.idea/
+.vscode/
+
+# Data outputs (keep committed cleaned data, but ignore temp files)
+data/*.tmp
+data/*.bak
+data/**/.DS_Store
+data_raw/**/.DS_Store
+
+# Packages local artifacts
+python-lib/dist/
+python-lib/build/
+python-lib/*.egg-info/
+js-lib/dist/
+
+

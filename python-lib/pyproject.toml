@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "yourlib"
+version = "0.1.0"
+description = "Datasets and simple API for word datasets"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+  { name = "Contributors" }
+]
+keywords = ["datasets", "words", "nlp", "data"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/your-org/word-datasets"
+Repository = "https://github.com/your-org/word-datasets"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["yourlib*"]
+
+[tool.setuptools.package-data]
+yourlib = ["data/**/*", "data/*", "*.txt"]
+
+
