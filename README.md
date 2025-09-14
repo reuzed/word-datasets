@@ -70,3 +70,42 @@ for await (const w of iterTextLines("words.txt")) {
 Please keep `data/` canonical—both packages read only from there. Avoid duplicating datasets inside package source; use the provided copy scripts to stage data for builds.
 
 License: MIT
+
+## Datasets included
+
+Each dataset is a plain UTF-8 `.txt` file with one word per line.
+
+| File             | Language           |   Lines |   Size |
+| ---------------- | ------------------ | ------: | -----: |
+| `words.txt`      | Mixed/common words | 466,550 | 4.6 MB |
+| `francais.txt`   | French             | 208,916 | 2.2 MB |
+| `espanol.txt`    | Spanish            | 174,849 | 1.8 MB |
+| `deutsch.txt`    | German             | 166,105 | 1.9 MB |
+| `italiano.txt`   | Italian            |  88,353 | 836 KB |
+| `nederlands.txt` | Dutch              |  52,614 | 532 KB |
+| `norsk.txt`      | Norwegian          |  61,415 | 572 KB |
+| `dansk.txt`      | Danish             |  23,517 | 228 KB |
+
+Note: Counts and sizes are approximate and may change as datasets evolve.
+
+## Library APIs
+
+Both libraries expose simple helpers to discover datasets and read them as lines.
+
+- Python (`word_datasets`):
+
+  - `data_dir() -> Path`: path to installed data.
+  - `dataset_path(rel_path: str) -> Path`: absolute path for a dataset.
+  - `list_datasets() -> List[str]`: list files relative to `data/`.
+  - `iter_text_lines(rel_path: str, strip: bool = True) -> Iterator[str]`: stream lines.
+  - `read_text_lines(rel_path: str, limit: Optional[int] = None, strip: bool = True) -> List[str]`: read lines into memory.
+  - `read_json(rel_path: str) -> Any`: read a JSON file (if present).
+
+- JS/TS (`word-datasets`):
+  - `dataDir(): string`
+  - `listDatasets(): string[]`
+  - `async iterTextLines(relPath: string): AsyncIterable<string>`
+  - `readTextLines(relPath: string, limit?: number): Promise<string[]>`
+  - `readJson(relPath: string): unknown`
+
+See package READMEs in `python-lib/` and `js-lib/` for full examples.
