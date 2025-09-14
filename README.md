@@ -37,15 +37,26 @@ You can also copy shared data into both packages before building:
 - Python:
 
 ```python
-import yourlib
-print(yourlib.list_datasets())
+import word_datasets as wd
+print(wd.list_datasets())
+# iterate a list (e.g., "words.txt")
+for i, w in enumerate(wd.iter_text_lines("words.txt")):
+    if i < 5:
+        print(w)
+    else:
+        break
 ```
 
 - JavaScript/TypeScript:
 
 ```ts
-import { listDatasets } from "yourlib";
+import { listDatasets, iterTextLines } from "word-datasets";
 console.log(listDatasets());
+let i = 0;
+for await (const w of iterTextLines("words.txt")) {
+  if (i++ < 5) console.log(w);
+  else break;
+}
 ```
 
 ### Contributing

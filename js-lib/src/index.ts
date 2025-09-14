@@ -1,6 +1,7 @@
-import { readdirSync, statSync, readFileSync } from "node:fs";
+import { readdirSync, statSync, readFileSync, createReadStream } from "node:fs";
 import { dirname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
+import readline from "node:readline";
 
 export function dataDir(): string {
   // __dirname works in CJS; for ESM, fallback to URL resolution
@@ -39,4 +40,35 @@ export function readJson(relPath: string): unknown {
   return JSON.parse(text);
 }
 
-export default { dataDir, listDatasets, readJson };
+export async function* iterTextLines(
+  relPath: string
+): AsyncGenerator<string, void, void> {
+  const p = join(dataDir(), relPath);
+  const stream = createReadStream(p, { encoding: "utf8" });
+  const rl = readline.createInterface({ input: stream, crlfDelay: Infinity });
+  for await (const line of rl) {
+    yield (line as string).trim();
+  }
+}
+
+export async function readTextLines(
+  relPath: string,
+  limit?: number
+): Promise<string[]> {
+  const out: string[] = [];
+  let count = 0;
+  for await (const line of iterTextLines(relPath)) {
+    out.push(line);
+    count += 1;
+    if (typeof limit === "number" && count >= limit) break;
+  }
+  return out;
+}
+
+export default {
+  dataDir,
+  listDatasets,
+  readJson,
+  iterTextLines,
+  readTextLines,
+};

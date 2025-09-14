@@ -1,5 +1,5 @@
 {
-  "name": "yourlib",
+  "name": "word-datasets",
   "version": "0.1.0",
   "description": "Datasets and API for word datasets (JS/TS)",
   "license": "MIT",

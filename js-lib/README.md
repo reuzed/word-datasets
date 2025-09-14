@@ -1,4 +1,4 @@
-## yourlib (JS/TS)
+## word-datasets (JS/TS)
 
 JS/TS package for the word datasets.
 
@@ -14,6 +14,11 @@ npm publish
 ### Usage
 
 ```ts
-import { listDatasets } from "yourlib";
+import { listDatasets, iterTextLines } from "word-datasets";
 console.log(listDatasets());
+let i = 0;
+for await (const w of iterTextLines("words.txt")) {
+  if (i++ < 5) console.log(w);
+  else break;
+}
 ```

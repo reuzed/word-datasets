@@ -1,4 +1,4 @@
-## yourlib (Python)
+## word-datasets (Python)
 
 Python package for the word datasets.
 
@@ -19,6 +19,12 @@ twine upload dist/*
 ### Usage
 
 ```python
-import yourlib
-print(yourlib.list_datasets())
+import word_datasets as wd
+print(wd.list_datasets())
+
+for i, w in enumerate(wd.iter_text_lines("words.txt")):
+    if i < 5:
+        print(w)
+    else:
+        break
 ```

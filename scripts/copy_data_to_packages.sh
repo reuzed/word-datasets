@@ -5,7 +5,7 @@ ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 DATA_DIR="$ROOT_DIR/data"
 
 # Python package
-PY_DATA_DST="$ROOT_DIR/python-lib/src/yourlib/data"
+PY_DATA_DST="$ROOT_DIR/python-lib/src/word_datasets/data"
 mkdir -p "$PY_DATA_DST"
 rsync -av --delete "$DATA_DIR/" "$PY_DATA_DST/" 2>/dev/null || true
 
