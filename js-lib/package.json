@@ -11,6 +11,7 @@
     ".": {
       "import": "./dist/index.js",
       "require": "./dist/index.cjs",
+      "browser": "./dist/browser.js",
       "types": "./dist/index.d.ts"
     }
   },
@@ -18,7 +19,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "rimraf dist && tsup src/index.ts --dts --format esm,cjs --out-dir dist && node ./scripts/copy-data.mjs",
+    "build": "rimraf dist && tsup src/index.ts src/browser.ts --dts --format esm,cjs --out-dir dist && node ./scripts/copy-data.mjs",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {

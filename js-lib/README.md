@@ -30,6 +30,34 @@ for await (const w of iterTextLines("words.txt")) {
 }
 ```
 
+### Browser usage
+
+This package now ships a browser-friendly build that fetches the text files via HTTP.
+
+You can load files directly from a CDN like unpkg:
+
+```html
+<script type="module">
+  import {
+    listDatasetsBrowser,
+    readTextLinesBrowser,
+  } from "https://unpkg.com/word-datasets@0.1.0/dist/browser.js";
+  console.log(await listDatasetsBrowser());
+  console.log(await readTextLinesBrowser("words.txt", 5));
+</script>
+```
+
+Or, if bundling with Vite/Webpack, just import from the package:
+
+```ts
+import {
+  listDatasetsBrowser,
+  readTextLinesBrowser,
+} from "word-datasets/dist/browser.js";
+console.log(await listDatasetsBrowser());
+console.log(await readTextLinesBrowser("words.txt", 5));
+```
+
 ### API
 
 - `dataDir(): string`
