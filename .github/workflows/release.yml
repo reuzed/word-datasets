@@ -1,0 +1,51 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "py-v*"
+      - "js-v*"
+      - "v*"
+
+jobs:
+  publish-python:
+    if: startsWith(github.ref_name, 'py-v') || startsWith(github.ref_name, 'v')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Build
+        working-directory: python-lib
+        run: |
+          python -m pip install --upgrade pip build twine
+          python tools/prepare_data.py
+          python -m build
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: python-lib/dist
+          user: __token__
+          password: ${{ secrets.PYPI_API_TOKEN }}
+
+  publish-npm:
+    if: startsWith(github.ref_name, 'js-v') || startsWith(github.ref_name, 'v')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
+      - name: Build
+        working-directory: js-lib
+        run: |
+          npm ci
+          npm run build
+      - name: Publish to npm
+        working-directory: js-lib
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm publish --access public

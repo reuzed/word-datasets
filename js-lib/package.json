@@ -1,6 +1,6 @@
 {
   "name": "word-datasets",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Datasets and API for word datasets (JS/TS)",
   "license": "MIT",
   "type": "module",
